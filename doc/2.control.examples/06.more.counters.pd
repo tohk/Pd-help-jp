@@ -1,38 +1,57 @@
-#N canvas 8 0 659 487 12;
-#X floatatom 147 177 0 0 0;
-#X obj 147 151 + 1;
-#X msg 147 47 bang;
-#X obj 147 99 metro 500;
-#X msg 56 105 stop;
-#X obj 147 125 float;
-#X obj 147 73 trigger bang bang;
-#X msg 261 105 0;
-#X obj 56 79 select 10;
-#X text 305 102 first set value to zero;
-#X text 304 73 initialization is in two steps;
-#X text 305 121 (before starting the metronome);
-#X text 9 128 conditionally;
-#X text 9 145 stop the;
-#X text 10 159 metronome;
-#X text 184 46 <--- click here to start;
-#X floatatom 85 289 0 0 0;
-#X obj 85 315 >= 0;
-#X obj 85 341 select 0 1;
-#X obj 85 393 float;
-#X floatatom 139 420 0 0 0;
-#X msg 119 367 bang;
-#X obj 139 394 + 1;
-#X msg 85 367 -1;
-#X text 131 313 <-- are we nonnegative? (1 if true \, 0 if false);
-#X text 180 340 <-- selectively bang the first or second outlet;
-#X text 167 363 <-- as a result either clear or increment the counter
+#N canvas 8 0 656 677 12;
+#X floatatom 147 213 0 0 0 0 - - -;
+#X obj 147 187 + 1;
+#X msg 147 83 bang;
+#X obj 147 135 metro 500;
+#X msg 56 141 stop;
+#X obj 147 161 float;
+#X obj 147 109 trigger bang bang;
+#X msg 261 141 0;
+#X obj 56 115 select 10;
+#X floatatom 10 372 0 0 0 0 - - -;
+#X obj 10 398 >= 0;
+#X obj 10 424 select 0 1;
+#X obj 10 522 float;
+#X floatatom 64 549 0 0 0 0 - - -;
+#X msg 44 492 bang;
+#X obj 64 523 + 1;
+#X msg 10 492 -1;
+#X text 277 609 updated for Pd version 0.34;
+#X text 8 9 6.もうすこし複雑なカウンター;
+#X text 32 47 これは、1 - 10 までを数えるカウンターです
 ;
-#X text 32 11 Here's a counter that counts from 1 to 10:;
-#X text 392 452 updated for Pd version 0.34;
-#X text 33 200 We're using one new object \, "select \, " which outputs
-a bang when it gets a matching value (10). This is useful for doing
-conditional computations \, such as this one which counts while its
-input is 0 or positive but clears when negative:;
+#X text 184 82 <--- ここをクリックしてスタート;
+#X text 304 109 初期化は2段階にわたって行われる。;
+#X text 305 138 まず、0をセットする。;
+#X text 305 157 （メトロノームがスタートする前に）
+;
+#X text 9 164 条件により;
+#X text 9 181 メトロノームを;
+#X text 10 195 とめる;
+#X text 10 242 新しいオブジェクト"select" がでてきましたが、
+;
+#X text 10 259 指定した数値（この場合は10)が入力されると、bangを出力します。
+;
+#X text 10 295 この機能は、入力が、0かプラスの時に、カウントをして、
+;
+#X text 10 313 入力が、マイナスの時に、カウンターをクリアする。というような、
+;
+#X text 10 332 条件判断に使えます。（以下の例）;
+#X text 56 396 <-- 真か偽か。 真(true)なら 1を出力、偽(false)なら
+0を出力;
+#X text 105 423 <-- 入力に応じて、1番目か、2番目から、bangを出力
+;
+#X text 130 437 最初の引数 0が入力されたら一番左のアウトレットから
+;
+#X text 130 451 ２番目の引数 1が入力されたら左から２番目のアウトレットから、bangを出力。
+;
+#X text 130 464 それ以外の時は、一番右のアウトレットから、入力がそのまま出力される
+;
+#X text 105 488 <-- selectの結果により、floatが、-1で”初期化"されたり
+;
+#X text 130 503 bangで、floatの中身が出力される。;
+#X text 130 517 これにより、カウンターが 0に戻ったり、増加したりする。
+;
 #X connect 1 0 0 0;
 #X connect 1 0 5 1;
 #X connect 1 0 8 0;
@@ -44,12 +63,12 @@ input is 0 or positive but clears when negative:;
 #X connect 6 1 7 0;
 #X connect 7 0 5 1;
 #X connect 8 0 4 0;
-#X connect 16 0 17 0;
-#X connect 17 0 18 0;
-#X connect 18 0 23 0;
-#X connect 18 1 21 0;
-#X connect 19 0 22 0;
-#X connect 21 0 19 0;
-#X connect 22 0 19 1;
-#X connect 22 0 20 0;
-#X connect 23 0 19 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 11 0 16 0;
+#X connect 11 1 14 0;
+#X connect 12 0 15 0;
+#X connect 14 0 12 0;
+#X connect 15 0 12 1;
+#X connect 15 0 13 0;
+#X connect 16 0 12 0;

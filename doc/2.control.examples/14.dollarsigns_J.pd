@@ -1,0 +1,6 @@
+#N canvas 587 368 561 155 12;
+#X text 303 114 updated for Pd version 0.34;
+#X text 32 14 アブストラクションで作られる引数は、数値かシンボルか、
+;
+#X text 32 31 血なまぐさい詳細は、その中に・・・;
+#X obj 34 68 dollarsign2 three 4;

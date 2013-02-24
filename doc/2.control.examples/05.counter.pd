@@ -1,45 +1,82 @@
-#N canvas 0 0 685 496 12;
-#X floatatom 107 424 0 0 0;
-#X msg 53 344 bang;
-#X obj 107 399 + 1;
-#X obj 376 262 + 1;
-#X floatatom 152 197 0 0 0;
-#X floatatom 108 245 0 0 0;
-#X msg 108 196 bang;
-#X floatatom 169 107 0 0 0;
-#X msg 112 58 bang;
-#X obj 169 82 + 1;
-#X text 31 21 Here's a simple counter. Click repeatedly on the "bang
-message to see it:;
-#X text 422 263 to its cold inlet.;
-#X text 25 284 The incremented value is stored for the next "bang"
-to spit out.;
-#X text 28 322 Here's a timed counter. Hit the "bang" to start it...
+#N canvas 136 89 685 841 12;
+#X floatatom 107 500 0 0 0 0 - - -;
+#X msg 53 420 bang;
+#X obj 107 475 + 1;
+#X obj 227 316 + 1;
+#X floatatom 152 245 0 0 0 0 - - -;
+#X floatatom 108 293 0 0 0 0 - - -;
+#X msg 108 244 bang;
+#X floatatom 169 126 0 0 0 0 - - -;
+#X msg 112 77 bang;
+#X obj 169 101 + 1;
+#X obj 53 449 metro 500;
+#X msg 99 420 stop;
+#X obj 112 102 float;
+#X obj 108 269 float;
+#X obj 53 475 float;
+#X text 449 815 updated for Pd version 0.34;
+#X text 31 34 これは、シンプルなカウンターです。"bang"メッセージを、繰り返しクリックし、
 ;
-#X obj 53 373 metro 500;
-#X msg 99 344 stop;
-#X obj 112 83 float;
-#X text 28 132 The "float" box is a storage element holding one floating-point
-number. The cold inlet (i.e. \, the one on the right) stores numbers.
-Sending the message "bang" to the hot inlet gets the number back out:
+#X text 31 50 その機能を確認してみてください。;
+#X text 31 151 "float"ボックスは、ひとつの浮動小数点の数値を保持します。
 ;
-#X obj 108 221 float;
-#X obj 53 399 float;
-#X text 25 263 Float's outlet above is connected via;
-#X text 384 462 updated for Pd version 0.34;
-#X text 142 373 <-- new object: metronome. The "500" means every 500
-milliseconds--i.e. \, twice a second.;
-#X connect 1 0 14 0;
+#X text 31 168 ボックスの右側のインレット(コールド)への入力で数値が保持され、
+;
+#X text 31 186 "bang"メッセージを左側のインレット(ホット)に送ることによって、
+;
+#X text 31 206 その数値が、出力されます。;
+#X text 31 318 最初の例の"float"ボックスでは;
+#X text 261 318 を経由して、自身の、コールドインレットに接続しています。
+;
+#X text 31 336 これにより、インクリメントした数値が、コールドインレットに入り保持され、
+;
+#X text 31 354 次に"bang"メッセージをホットインレットが受け取った時に出力されるのです。
+;
+#X text 31 392 これは、時間制御カウンターです、"bang"クリックするとスタートします。
+;
+#X text 172 466 500は、500ミリ秒を意味します（一秒間に2回）
+;
+#X text 142 449 <-- 新しいオブジェクト: メトロノームのような働きをします。
+;
+#X text 6 5 5.カウンターを作ってみる。"float"オブジェクトの使い方....それから"metro"
+;
+#X text 31 534 ここで、新しく metro　というオブジェクトが出てきました。
+;
+#X text 31 550 metro は、ホットインレットに bangメッセージを受け取ると、
+;
+#X text 31 568 アウトレットから、一定の間隔で、bangメッセージを出力し続けるオブジェクトです。
+;
+#X text 31 587 間隔の設定は、上の例のように、[metro
+500] とか、[metro 2000]のように、書くか;
+#X text 31 605 metroの右側のインレットに、数値のメッセージを送ることで行います。
+;
+#X text 31 636 ※オブジェクトボックスの、オブジェクト名の後ろの、
+;
+#X text 31 652 数値や文字列(=そのオブジェクトへのパラメータ）を、引数(ひきすう)と呼びます。
+;
+#X text 31 669 引数は、固定されたものではなく、外部から、変更することもできます。
+;
+#X text 31 683 この metroの場合、最初は、500となっているが、右側インレットに
+;
+#X text 31 699 新たな、数値メッセージを送ることで、変更できます。
+;
+#X text 29 723 なぜ、metroを止めるメッセージが、 [stop]で、
+;
+#X text 30 737 スタートさせるメッセージが、[start]では、なくて、[bang]なのか？
+;
+#X text 29 752 Pd や Maxでは、[bang]メッセージが、さまざまな場面で使用されます。
+;
+#X connect 1 0 10 0;
 #X connect 2 0 0 0;
-#X connect 2 0 19 1;
-#X connect 4 0 18 1;
-#X connect 6 0 18 0;
-#X connect 8 0 16 0;
+#X connect 2 0 14 1;
+#X connect 4 0 13 1;
+#X connect 6 0 13 0;
+#X connect 8 0 12 0;
 #X connect 9 0 7 0;
-#X connect 9 0 16 1;
-#X connect 14 0 19 0;
-#X connect 15 0 14 0;
-#X connect 15 0 14 0;
-#X connect 16 0 9 0;
-#X connect 18 0 5 0;
-#X connect 19 0 2 0;
+#X connect 9 0 12 1;
+#X connect 10 0 14 0;
+#X connect 11 0 10 0;
+#X connect 11 0 10 0;
+#X connect 12 0 9 0;
+#X connect 13 0 5 0;
+#X connect 14 0 2 0;

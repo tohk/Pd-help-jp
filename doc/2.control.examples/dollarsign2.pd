@@ -1,54 +1,63 @@
-#N canvas 22 54 588 671 12;
-#X text 324 642 updated for Pd version 0.34;
-#X text 34 6 This is an abstraction used in example 13 \, "dollarsigns".
+#N canvas 615 349 588 764 12;
+#X text 324 723 updated for Pd version 0.34;
+#X obj 88 122 send \$1;
+#X obj 199 122 + \$2;
+#X floatatom 303 95 0 0 0 0 - - -;
+#X obj 303 146 print;
+#X msg 303 122 blah \$1;
+#X msg 188 333 bang;
+#X obj 188 361 symbol \$1;
+#X msg 98 333 bang;
+#X obj 98 361 float \$2;
+#X floatatom 98 388 5 0 0 0 - - -;
+#X symbolatom 188 390 10 0 0 0 - - -;
+#X msg 97 444 bang;
+#X obj 97 468 float \$2;
+#X msg 97 495 five \$1;
+#X obj 97 520 print;
+#X msg 96 593 bang;
+#X obj 96 645 symbol \$1;
+#X obj 215 641 f \$2;
+#X obj 96 621 t b b;
+#X obj 95 668 pack symbol float;
+#X msg 95 694 six \$1 \$2;
+#X obj 95 721 print;
+#X text 28 52 アブストラクションが作られたときの引数を参照します。
 ;
-#X obj 88 107 send \$1;
-#X obj 199 106 + \$2;
-#X floatatom 303 88 0 0 0;
-#X obj 303 139 print;
-#X msg 303 113 blah \$1;
-#X text 36 163 This may sound inconsistant \, but it's not--object
-and message boxes are both actually messages \, but in the case of
-the Object box the message is passed at creation time \, and for the
-Message box \, at message time.;
-#X msg 188 272 bang;
-#X obj 188 300 symbol \$1;
-#X msg 98 272 bang;
-#X obj 98 300 float \$2;
-#X floatatom 98 327 5 0 0;
-#X symbolatom 188 329 10 0 0;
-#X text 36 233 So how do you put creation arguments in messages? Use
-"float" and "symbol" as shown:;
-#X msg 97 383 bang;
-#X obj 97 407 float \$2;
-#X msg 97 434 five \$1;
-#X text 41 357 Then if you wish \, connect to a message box as in:
+#X text 30 36 オブジェクトボックスの中では、\$1 は、
 ;
-#X obj 97 459 print;
-#X msg 143 512 bang;
-#X obj 143 564 symbol \$1;
-#X obj 237 560 f \$2;
-#X obj 143 540 t b b;
-#X obj 142 587 pack symbol float;
-#X msg 142 613 six \$1 \$2;
-#X obj 142 640 print;
-#X text 31 485 For messages combining more than one creation argument
-try:;
-#X text 37 50 In Object boxes \, dollar signs refer to the abstraction's
-creation arguments. In Messages \, they change dynamically:;
-#X connect 4 0 6 0;
-#X connect 6 0 5 0;
+#X text 29 69 メッセージボックスでは、それらは動的に変化します。
+;
+#X text 36 196 ちょっと奇妙にきこえるかもしれません。
+;
+#X text 35 212 しかし、オブジェクトボックスとメッセージボックスは実際には、メッセージではなく、
+;
+#X text 33 228 オブジェクトボックスの場合、メッセージは
+;
+#X text 32 244 作られたときに通過し、メッセージボックスの場合は;
+#X text 30 262 メッセージが作られた時につかわれるのです。
+;
+#X text 36 294 ではどのように、メッセージの中に引数をいれるか？
+;
+#X text 37 309 "float" and "symbol"を使えばいいのです;
+#X text 41 418 もしのぞむなら、メッセージボックスに接続する:
+;
+#X text 31 566 ひとつ以上の引数の結合:;
+#X text 34 6 これは、14.dollarsignes.pd　で使われるアブストラクトです
+;
+#X connect 3 0 5 0;
+#X connect 5 0 4 0;
+#X connect 6 0 7 0;
+#X connect 7 0 11 0;
 #X connect 8 0 9 0;
-#X connect 9 0 13 0;
-#X connect 10 0 11 0;
-#X connect 11 0 12 0;
-#X connect 15 0 16 0;
-#X connect 16 0 17 0;
-#X connect 17 0 19 0;
-#X connect 20 0 23 0;
-#X connect 21 0 24 0;
-#X connect 22 0 24 1;
-#X connect 23 0 21 0;
-#X connect 23 1 22 0;
-#X connect 24 0 25 0;
-#X connect 25 0 26 0;
+#X connect 9 0 10 0;
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+#X connect 14 0 15 0;
+#X connect 16 0 19 0;
+#X connect 17 0 20 0;
+#X connect 18 0 20 1;
+#X connect 19 0 17 0;
+#X connect 19 1 18 0;
+#X connect 20 0 21 0;
+#X connect 21 0 22 0;

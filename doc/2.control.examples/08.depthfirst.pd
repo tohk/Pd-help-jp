@@ -1,34 +1,47 @@
-#N canvas 144 162 632 551 12;
-#X msg 64 51 1;
-#X obj 89 150 + 1;
-#X obj 209 187 print x1;
-#X obj 64 209 print x3;
-#X obj 114 122 print x2;
-#X obj 209 100 + 1;
-#X obj 209 129 + 1;
-#X obj 209 158 + 1;
-#X obj 64 80 t f f f f;
-#X obj 89 179 print x2;
-#X text 34 13 In Pd \, message passing is depth first \, so that in
-this patch:;
-#X text 104 51 <-- click here;
-#X text 17 243 ... you get "x1" first \, notwidthstanding the fact
-that "x2" and "x3" appear to be closer to the source. This means that
-you shouldn't do this:;
-#X msg 76 304 1;
-#X text 116 304 <-- maybe you shouldn't click here;
-#X obj 115 334 + 1;
-#X obj 76 333 f;
-#X floatatom 76 365 0 0 0;
-#X text 377 520 updated for Pd version 0.34;
-#X text 35 393 ... because the "depth" is infinite. The counters you've
-seen always have the message chain terminated somewhere in a cold inlet:
+#N canvas 799 383 632 644 12;
+#X msg 64 96 1;
+#X obj 89 195 + 1;
+#X obj 209 232 print x1;
+#X obj 64 254 print x3;
+#X obj 114 167 print x2;
+#X obj 209 145 + 1;
+#X obj 209 174 + 1;
+#X obj 209 203 + 1;
+#X obj 64 125 t f f f f;
+#X obj 89 224 print x2;
+#X text 102 96 <-- click here;
+#X msg 76 368 1;
+#X obj 115 398 + 1;
+#X obj 76 397 f;
+#X floatatom 76 429 0 0 0 0 - - -;
+#X text 378 591 updated for Pd version 0.34;
+#X msg 75 530 1;
+#X obj 114 560 + 1;
+#X obj 75 559 f;
+#X floatatom 75 591 0 0 0 0 - - -;
+#X text 7 6 8.デプス・ファースト（メッセージの流れ方）
 ;
-#X msg 75 453 1;
-#X obj 114 483 + 1;
-#X obj 75 482 f;
-#X floatatom 75 514 0 0 0;
-#X text 115 453 <-- better;
+#X text 115 530 <-- better;
+#X text 20 58 Pdでは、メッセージは、depth first（後ろのほうが先に）で通過していきます。
+;
+#X text 144 121 <-- これは、 trigger float float float float の略
+;
+#X text 20 288 ターミナルウィンドウに、最初に"x1"が出力され、
+;
+#X text 20 306 次に"x2"、"x2"、"x3"の順で、出力されたとおもいます。
+;
+#X text 20 343 なので、こういうことはするべきではないです。
+;
+#X text 20 458 なぜなら この"depth"は無限で、あなたが見たカウンターは
+;
+#X text 20 474 いつも、どこかのコールドインレットで、区切られたメッセージチェーンを持っています。
+;
+#X text 116 368 <-- これは、クリックするべきではないのですが・・・・
+;
+#X text 180 395 予想外の結果になり、Pdウインドウに、stack
+overflow と、;
+#X text 182 412 赤字でエラーメッセージが出力されていると思います
+;
 #X connect 0 0 8 0;
 #X connect 1 0 9 0;
 #X connect 5 0 6 0;
@@ -38,11 +51,11 @@ seen always have the message chain terminated somewhere in a cold inlet:
 #X connect 8 1 1 0;
 #X connect 8 2 4 0;
 #X connect 8 3 5 0;
-#X connect 13 0 16 0;
-#X connect 15 0 16 0;
-#X connect 16 0 17 0;
-#X connect 16 0 15 0;
-#X connect 20 0 22 0;
-#X connect 21 0 22 1;
-#X connect 22 0 23 0;
-#X connect 22 0 21 0;
+#X connect 11 0 13 0;
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+#X connect 13 0 12 0;
+#X connect 16 0 18 0;
+#X connect 17 0 18 1;
+#X connect 18 0 19 0;
+#X connect 18 0 17 0;
