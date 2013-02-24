@@ -1,40 +1,58 @@
-#N canvas 490 83 724 474 12;
-#X text 34 13 Besides the metronome \, there are three objects for
-dealing with time:;
-#X obj 64 117 print;
-#X msg 64 59 bang;
-#X msg 110 61 stop;
-#X obj 64 89 delay 2000;
-#X msg 76 192 bang;
-#X obj 76 239 timer;
-#X text 160 117 The right inlet can be used to set the time value without
-scheduling any output.;
-#X obj 106 214 delay 123.45;
-#X floatatom 76 264 0 0 0 0 - - -;
-#X text 34 288 Note that all time calculations are idealized \; they
-do not show the effects of computation time or OS latency. This way
-you can write deterministic algorithms dealing with time passage.;
-#X obj 74 387 pipe 2000;
-#X floatatom 74 360 0 0 0 0 - - -;
-#X floatatom 74 413 0 0 0 0 - - -;
-#X text 165 361 The pipe object allocates memory dynamically in order
-to schedule any number of delayed events. The events may hold any collection
-of data (as usual \, for more details you can consult the help window.)
+#N canvas 9 23 773 715 12;
+#X obj 64 156 print;
+#X msg 64 98 bang;
+#X msg 110 100 stop;
+#X obj 64 128 delay 2000;
+#X msg 67 306 bang;
+#X obj 67 357 timer;
+#X obj 97 332 delay 123.45;
+#X floatatom 67 382 0 0 0 0 - - -;
+#X obj 67 538 pipe 2000;
+#X floatatom 67 511 0 0 0 0 - - -;
+#X floatatom 67 564 0 0 0 0 - - -;
+#X text 435 591 updated for Pd version 0.43;
+#X text 9 9 7.時間に関連するオブジェクト;
+#X text 34 52 metronomeに続いて、「時間」に関連する、有用な3つのオブジェクトたち
 ;
-#X text 442 440 updated for Pd version 0.43;
-#X text 35 154 The timer \, shown below \, measures the time elapsed
-between the arrival of 'bang' messages to its left and right inlets:
+#X text 155 79 delay オブジェクトは、イベントの実行を、
 ;
-#X text 159 40 The delay object schedules an event for a future time
-expressed in milliseconds. Unlike in Max \, time values need not be
-integers. If a delay has been scheduled and you "bang" it again \,
-it is rescheduled (the previously scheduled output is cancelled.);
-#X connect 2 0 4 0;
-#X connect 3 0 4 0;
-#X connect 4 0 1 0;
-#X connect 5 0 6 0;
-#X connect 5 0 8 0;
-#X connect 6 0 9 0;
-#X connect 8 0 6 1;
-#X connect 11 0 13 0;
-#X connect 12 0 11 0;
+#X text 155 97 ミリ秒単位で、遅延させるオブジェクトです。
+;
+#X text 155 115 Maxとちがって、遅らせる時間の数値は、整数である必要はありません。
+;
+#X text 155 134 また、一度、"bang"をして、delayが時間のカウントを開始している状態のときに、
+;
+#X text 155 152 もう一度、"bang"をすると、一度目のディレイのカウントは、キャンセルされて、
+;
+#X text 155 170 再度時間のカウントが開始します。;
+#X text 155 196 また右側のインレットは、出力のスケジューリング無し(delayの動作無しに)に
+;
+#X text 155 213 時間のセットのみをすることができる。
+;
+#X text 155 233 delayのホットインレットは、bangのみを受信し、出力も
+bangのみです。;
+#X text 36 277 下に示したtimerは、左側と右側のインレットのからの入力の経過時間を計測します。
+;
+#X text 34 422 すべての、時間計算は、”理想化”されており
+;
+#X text 33 439 計算のための時間や、OSによる遅延は、考慮されていないことを、おぼえておいてください。
+;
+#X text 32 456 このように、時間処理に関する決定論アルゴリズムを書くことができます。
+;
+#X text 158 512 pipeオブジェクトは、遅延させるイベントを
+;
+#X text 158 530 いくつでも制御するためにダイナミックにメモリーを割り当てます。
+;
+#X text 158 549 どんな集まりのメッセージ間のタイミングも保持します。
+;
+#X text 158 566 (更に詳しい情報については、pipeのヘルプを参照してください。)
+;
+#X connect 1 0 3 0;
+#X connect 2 0 3 0;
+#X connect 3 0 0 0;
+#X connect 4 0 5 0;
+#X connect 4 0 6 0;
+#X connect 5 0 7 0;
+#X connect 6 0 5 1;
+#X connect 8 0 10 0;
+#X connect 9 0 8 0;

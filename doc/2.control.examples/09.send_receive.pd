@@ -1,35 +1,46 @@
-#N canvas 136 31 738 479 12;
-#X floatatom 88 199 0 0 0;
-#X obj 88 172 receive crackers;
-#X floatatom 248 204 0 0 0;
-#X obj 248 177 receive pickles;
-#X obj 88 145 send crackers;
-#X obj 250 139 send pickles;
-#X obj 389 138 send pickles;
-#X floatatom 392 203 0 0 0;
-#X obj 392 176 receive pickles;
-#X msg 51 306 \; pickles 99 \; crackers 56;
-#X floatatom 88 118 0 0 0;
-#X floatatom 250 112 0 0 0;
-#X floatatom 389 111 0 0 0;
-#X obj 371 404 r crackers;
-#X obj 371 377 s crackers;
-#X text 39 392 send and receive can be abbreviated:;
-#X text 48 245 You can use the semicolon feature of message boxes to
-address receives \, too. This is useful if you want to do a whole list
-of things:;
-#X text 166 305 The transaction takes place in zero time---i.e. \,
-if you tried to use "timer" to measure the time delay between the two
-\, you would get zero.;
-#X text 459 447 updated for Pd version 0.34;
-#X text 51 6 The send and receive objects allow you to make non-local
-connections. These work globally--you can use them to make two different
-patches intercommunicate if you wish. Any message a "send" gets appears
-at the output of every receive of the same name. There can be any number
-of sends and receives sharing the same name:;
+#N canvas 734 514 738 532 12;
+#X floatatom 88 224 0 0 0 0 - - -;
+#X obj 88 197 receive crackers;
+#X obj 88 170 send crackers;
+#X obj 389 170 send pickles;
+#X floatatom 390 224 0 0 0 0 - - -;
+#X obj 390 197 receive pickles;
+#X msg 51 342 \; pickles 99 \; crackers 56;
+#X floatatom 88 143 0 0 0 0 - - -;
+#X floatatom 389 143 0 0 0 0 - - -;
+#X obj 440 440 r crackers;
+#X obj 440 413 s crackers;
+#X text 459 483 updated for Pd version 0.34;
+#X text 9 16 9.ワイヤレスなメッセージの送信・受信
+;
+#X text 50 42 send とreceive オブジェクトは、ローカルでない接続(パッチコードのない)を可能にします。
+;
+#X text 50 61 これらは、広域的に使用することができ、もし望むなら、二つの違うパッチウインドウ間での
+;
+#X text 50 78 メッセージのやり取りを可能にします。
+;
+#X text 50 95 "send"に送られた、あらゆるメッセージは、同じ引数の名前がついた、"recieve"から出力されます。
+;
+#X text 50 115 同じ名前であれば、いくつでも共有されます。（右側2つの例）
+;
+#X text 50 281 また、メッセージボックスの、セミコロン機能を使って、receiveオブジェクトに
+;
+#X text 50 299 直接送信することもできます。この機能は、メッセージの一斉送信に便利です。
+;
+#X text 168 340 この処理は、ゼロタイムで行われます、
+;
+#X text 168 358 たとえば、"timer" オブジェクトを使って、時間を計っても
+;
+#X text 168 376 ０になると思います;
+#X text 50 428 send と receive は、右の様に略して書くこともできます:
+;
+#X floatatom 250 224 0 0 0 0 - - -;
+#X obj 250 197 receive pickles;
+#X obj 250 170 send pickles;
+#X floatatom 250 143 0 0 0 0 - - -;
 #X connect 1 0 0 0;
-#X connect 3 0 2 0;
-#X connect 8 0 7 0;
-#X connect 10 0 4 0;
-#X connect 11 0 5 0;
-#X connect 12 0 6 0;
+#X connect 5 0 4 0;
+#X connect 7 0 2 0;
+#X connect 8 0 3 0;
+#X connect 25 0 24 0;
+#X connect 27 0 26 0;

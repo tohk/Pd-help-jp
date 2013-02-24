@@ -1,46 +1,91 @@
-#N canvas 185 28 660 552 12;
-#X floatatom 76 400 0 0 0 0 - - -;
-#X floatatom 189 401 0 0 0 0 - - -;
-#X floatatom 76 307 0 0 0 0 - - -;
-#X floatatom 553 161 0 0 0 0 - - -;
-#X floatatom 599 162 0 0 0 0 - - -;
-#X obj 553 135 +;
-#X floatatom 553 105 0 0 0 0 - - -;
-#X obj 599 136 +;
-#X floatatom 26 109 0 0 0 0 - - -;
-#X floatatom 26 17 0 0 0 0 - - -;
-#X floatatom 48 41 0 0 0 0 - - -;
-#X obj 26 85 +;
-#X text 3 64 hot;
-#X text 53 66 cold;
-#X text 232 105 Here's the downside: drag this--->;
-#X text 551 180 good;
-#X text 600 181 bad;
-#X obj 76 376 *;
-#X obj 189 377 -;
-#X text 15 400 square;
-#X text 229 402 first difference;
-#X obj 76 330 trigger float float;
-#X text 412 526 updated for Pd version 0.33;
-#X text 19 433 Trigger takes any number of "bang" and "float" arguments
-(among others) and copies its input to its outlets \, in the requested
-forms \, in right-to-left order. Hook it to two inputs without crossing
-the wires and you get the expected result. Cross the wires and you
-get a memory effect.;
-#X text 9 136 In Pd you must sometimes think about what order an object
-is going to get its messages in. If an outlet is connected to more
-than one inlet it's undefined which inlet will get the cookie first.
-I've rigged this example so that the left-hand side box gets its inputs
-in the good \, right-to-left order \, so that the hot inlet gets hit
-when all the data are good. The "bad adder" happens to receive its
-inputs in the wrong order and is perpetually doing its addition before
-all the data are in. There's an object that exists solely to allow
-you to control message order explicitly:;
-#X text 114 16 In Pd \, most objects carry out their functions when
-they get messages in their leftmost inlets \, and their other inlets
-are for storing values that can modify the next action. Here \, the
-"+" object does its thing only when the left-hand input changes.;
-#X connect 2 0 21 0;
+#N canvas 150 166 1027 865 12;
+#X floatatom 72 635 0 0 0 0 - - -;
+#X floatatom 185 636 0 0 0 0 - - -;
+#X floatatom 72 542 0 0 0 0 - - -;
+#X floatatom 685 380 0 0 0 0 - - -;
+#X floatatom 731 381 0 0 0 0 - - -;
+#X obj 685 354 +;
+#X floatatom 685 324 0 0 0 0 - - -;
+#X obj 731 355 +;
+#X floatatom 62 137 0 0 0 0 - - -;
+#X floatatom 62 45 0 0 0 0 - - -;
+#X floatatom 84 69 0 0 0 0 - - -;
+#X obj 62 113 +;
+#X text 25 96 hot;
+#X text 96 100 cold;
+#X text 683 399 good;
+#X text 732 400 bad;
+#X obj 72 611 *;
+#X obj 185 612 -;
+#X text 11 604 square;
+#X text 225 637 first difference;
+#X obj 72 565 trigger float float;
+#X text 655 840 updated for Pd version 0.33;
+#X text 8 3 3 オブジェクトの接続において、考慮すべき事
+;
+#X text 155 32 Pdでは、ほとんどのオブジェクトは、一番左にあるインレット(ホットインレット）が入力を受けたときに
+;
+#X text 154 49 その、オブジェクトが持っている機能を実行するようになっています。
+;
+#X text 155 75 そのほかの インレット(コールドインレット）は、次のアクションのために、
+;
+#X text 155 92 変更可能な数値を保存しておくためのものになっています。
+;
+#X text 141 118 　この例では、足し算をしますが、上２つのナンバーボックスのうち、左側の
+;
+#X text 153 136 ナンバーボックスの数値を動かしたときのみ、足し算が実行されます。
+;
+#X text 10 170 この事により、Pdでは、オブジェクトが、メッセージを、どのような順番で受け取るかについて考慮しなければなりません。
+;
+#X text 9 190 　もし、アウトレットが、ひとつ以上の、定義されていないインレットに接続されたとき
+;
+#X text 9 206 その インレットは、クッキーを受け取ります。
+;
+#X text 9 252 次のパッチでは、goodのナンバーボックスは正しい結果を出力しますが、badは、予想しない結果になります。
+;
+#X text 9 272 goodの列では、一番上のナンバーボックスから[+]オブジェクトボックスの２つのインレットに
+;
+#X text 9 289 右側、左側という順番で接続してあります。
+;
+#X text 10 305 badの列では、左側、右側という順で接続してあります。
+;
+#X text 9 332 goodでは、右側から左側という順番で接続してあるの正しい順番で、
+;
+#X text 9 348 メッセージが[+]オブジェクトボックスに入り。計算が実行されます。
+;
+#X text 9 366 "bad" では不正な順番でメッセージが入力されるので、
+;
+#X text 9 381 右側のインレットに新しいメッセージが入力される前に、計算が実行されてしまいます。
+;
+#X text 9 417 Pdでは、一番左側のインレットを、ホットインレットといい、それ以外をコールドインレットといいますが、
+;
+#X text 9 434 たいていの場合、ホットインレットにメッセージが入力されると、即座に計算、あるいは処理が行われます。
+;
+#X text 9 450 そして、コールドインレットにメッセージが入力された場合は、そのオブジェクト内にメッセージが保持されるにとどまります。
+;
+#X text 9 513 メッセージの順番を明示的に制御することができる、オブジェクトがあります。
+;
+#X text 16 683 triggerオブジェクトは、"bang"と、"float"(=浮動小数点実数)を受け付けます。
+;
+#X text 16 698 そして、右から左への順番で、要求された書式(trigerの右側に書かれている引数)で、入力を出力へコピーします。
+;
+#X text 16 713 出力を交差させることなく接続すると、あなたが予期する結果が得られるでしょう。
+;
+#X text 16 728 ※squareでは、たとえば、最初に右側のインレットに2が入力され、瞬後に、左側のインレットに2が入力される。
+;
+#X text 16 743 そして、左側に入力が起こった時が、掛け算を実行する瞬間になるのです。
+;
+#X text 17 775 出力の接続を交差させると、"記憶の効果"が得られる
+;
+#X text 17 790 ※first differenceでは、引算のボックスでは、左側のインレットに入力があった時点で計算を実行するけれど
+;
+#X text 17 805 その時点では、まだ右側の入力が来ていないのです。また右側のインレットに入力あった時点では、計算は実行されない。
+;
+#X text 17 820 新しい数が左側のインレットに流れてきた瞬間に、計算が行われるのです。
+;
+#X text 518 321 中の数値を変更してみて--->;
+#X text 519 308 このobjectをドラッグして;
+#X connect 2 0 20 0;
 #X connect 5 0 3 0;
 #X connect 6 0 7 0;
 #X connect 6 0 7 1;
@@ -50,9 +95,9 @@ are for storing values that can modify the next action. Here \, the
 #X connect 9 0 11 0;
 #X connect 10 0 11 1;
 #X connect 11 0 8 0;
-#X connect 17 0 0 0;
-#X connect 18 0 1 0;
-#X connect 21 0 17 0;
-#X connect 21 0 18 1;
-#X connect 21 1 17 1;
-#X connect 21 1 18 0;
+#X connect 16 0 0 0;
+#X connect 17 0 1 0;
+#X connect 20 0 16 0;
+#X connect 20 0 17 1;
+#X connect 20 1 16 1;
+#X connect 20 1 17 0;
