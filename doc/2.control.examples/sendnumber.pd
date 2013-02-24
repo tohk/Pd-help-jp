@@ -1,26 +1,20 @@
-#N canvas 387 443 718 622 12;
+#N canvas 171 73 718 283 12;
 #X obj 34 60 inlet;
 #X obj 34 88 float \$1;
 #X obj 34 116 send \$2;
+#X text 26 225 For obvious reasons you might not want to call a patch
+as an abstraction from itself.;
+#X text 151 183 In this case \$1 is a number you can specify and \$2
+is a "send" destination.;
 #X text 461 260 updated for Pd version 0.26;
-#X text 152 16 このウィンドウは、Pdにおけるアブストラクションを説明するために
-12.PART2.subpatch.pdファイルで使われるウィンドウです。
-もしこのウィンドウを直接開いたのなら、これがどのように使われているのか
-知るために、12.PART2.subpatch.pdも開こうと思うと思います。
-;
-#X text 151 90 このアブストラクションを呼び出すにあたっては、
-;
-#X text 151 109 "sendnumber 1 x"というように、オブジェクトボックスを作成すればよいのです。
-;
-#X text 151 128 サブパッチは、引数(1 x)を、自分のオブジェクトボックスの中の　
-;
-#X text 151 146 \$1 \$2として アクセスすることができます。　
-ただし、メッセージボックスの中の;
-#X text 151 164 \$1については 別の意味を持ちます。 (メッセージボックスのヘルプを参照してください)
-;
-#X text 150 180 このケースでは、\$1 は、あなたが変更できる数値で、\$2は、sendの行き先になります。
-;
-#X text 49 218 あなたが、パッチをそれ自身から、アブストラクションとして呼び出したくない明快な理由
+#X text 154 103 When you call an abstraction by typing \, say \, "sendnumber
+1 x" in an object box. the subpatch can access the values of the creation
+arguments (1 and x) as "$1" and "$2" innside object boxes. Typing \$1
+inside a message box has a different meaning (see the message box help
+window.);
+#X text 155 31 This window is used by 11.subpatch.pd to demonstrate
+the abstraction mechanism in Pd. If you've opened this window directly
+\, you might also want to open the other one to see how it's used.
 ;
 #X connect 0 0 1 0;
 #X connect 1 0 2 0;

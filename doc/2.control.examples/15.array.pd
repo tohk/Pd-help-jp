@@ -1,86 +1,70 @@
-#N canvas 156 5 1051 895 12;
-#N canvas 0 0 450 300 (subpatch) 0;
-#X array array99 18 float 0;
-#X coords 0 1 17 -1 400 300 1;
+#N canvas 268 28 1030 744 12;
+#X text 204 19 ARRAYS;
+#N canvas 0 0 450 300 graph1 0;
+#X array array99 100 float 0;
+#X coords 0 1 99 -1 400 300 1;
 #X restore 614 49 graph;
-#X msg 179 399 \; array99 resize \$1;
-#X floatatom 179 373 0 0 0 0 - - -;
-#X floatatom 21 341 0 0 0 0 - - -;
-#X obj 21 375 / 100;
-#X msg 21 398 \; array99 const \$1;
-#X msg 341 399 \; array99 print;
-#X obj 104 824 tabread;
-#X obj 255 824 tabwrite;
+#X msg 179 325 \; array99 resize \$1;
+#X floatatom 179 292 0 0 0;
+#X floatatom 21 260 0 0 0;
+#X obj 21 294 / 100;
+#X msg 21 324 \; array99 const \$1;
+#X text 22 233 You can send messages to an array object:;
+#X msg 341 325 \; array99 print;
+#X text 64 262 <-- set to a constant value;
+#X text 221 291 resize;
+#X text 342 286 print size;
+#X text 22 487 read a text file;
+#X text 23 558 write a text file;
+#X text 271 559 write a WAV format soundfile;
+#X obj 104 714 tabread;
+#X obj 255 714 tabwrite;
+#X text 20 665 Objects are provided for reading and writing the contents
+of arrays via control messages:;
 #X obj 602 654 tabread4~;
 #X obj 602 679 tabwrite~;
 #X obj 695 654 tabreceive~;
+#X text 593 601 ...and audio signals:;
 #X obj 695 630 tabsend~;
-#X msg 381 481 \; array99 normalize;
-#X msg 382 523 \; array99 normalize 0.5;
-#X text 375 459 normalize to 1 or otherwise;
-#X obj 266 640 soundfiler;
+#X msg 381 400 \; array99 normalize;
+#X msg 382 442 \; array99 normalize 0.5;
+#X text 375 378 normalize to 1 or otherwise;
+#X obj 266 537 soundfiler;
 #X obj 812 631 tabosc4~;
-#X msg 19 483 \; array99 sinesum 64 0.2 0.2 0.2 0.2;
-#X msg 19 525 \; array99 cosinesum 64 0.2 0.2 0.2 0.2;
-#X text 23 459 Fourier synthesis (resizes table);
+#X msg 19 402 \; array99 sinesum 64 0.2 0.2 0.2 0.2;
+#X msg 19 444 \; array99 cosinesum 64 0.2 0.2 0.2 0.2;
+#X text 23 378 Fourier synthesis (resizes table);
+#X text 257 484 read a soundfile;
 #X text 735 698 last updated for release 0.34;
-#X obj 175 825 tabread4;
+#X obj 175 715 tabread4;
 #X obj 602 628 tabread~;
-#X msg 267 614 read ../sound/voice2.wav array99;
-#X msg 15 610 \; array99 read 15.file.txt;
-#X obj 26 685 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+#X msg 267 511 read ../sound/voice2.wav array99;
+#X text 19 47 Arrays in Pd provide a unified way to deal with lists
+of numbers \, treating them as either audio samples or for "control"
+uses. To make one \, select "array" on the "new" menu. Dialogs appear
+to help you choose the name \, number of elements \, and various flags.
+;
+#X text 17 134 You can also change the array size using the "resize"
+message shown below. Arrays live in graphs and graphs may hold more
+than one array--however \, graphs containing more than one array won't
+know how to readjust themselves automatically when the arrays are resized.
+;
+#X msg 15 507 \; array99 read 15.file.txt;
+#X obj 26 581 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
 -1;
-#X obj 26 704 savepanel;
-#X msg 26 727 \; array99 write \$1;
-#X obj 270 681 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+#X obj 26 600 savepanel;
+#X msg 26 623 \; array99 write \$1;
+#X obj 270 577 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
 -1;
-#X obj 270 700 savepanel;
-#X obj 270 746 soundfiler;
-#X msg 270 723 write \$1 array99;
-#X text 8 11 15.アレイ(=配列)について;
-#X text 18 33 Pdのアレイ(=配列/array)は、数値のリストを、オーディオサンプルや
-;
-#X text 18 50 さまざまな"制御"のための取り扱いのために処理する方法を提供する。
-;
-#X text 18 78 ※アレイは、複数の変数を"かたまり"にしたもの。と考えるとわかりやすいかもしれません。
-;
-#X text 18 113 "アレイ"は、配置メニューの一番下にある、アレイから作成できます。
-;
-#X text 18 129 作成すると、アレイの名前(他のアレイと重複しないユニークな名前であること）と
-;
-#X text 18 152 アレイを構成する要素の数を設定するウィンドウが現れます。
-;
-#X text 18 170 ここでは、いくつかの設定項目がありますが、とりあえずは初期値で可。
-;
-#X text 18 209 また以下の例の様に"resize"メッセージによって、アレイのサイズ（要素数）を変更することもできる
-;
-#X text 18 239 アレイの中身はグラフに反映されています。そして、グラフは複数のアレイを保持する、
-;
-#X text 18 256 とはいえ、ひとつ以上のアレイを包含するグラフは、アレイがリサイズされたときに、
-;
-#X text 18 276 自動でグラフのメモリを再調整することができません。
-;
-#X text 22 314 アレイにメッセージを送ることができる
-;
-#X text 64 343 <-- 定数をセット;
-#X text 218 374 要素数の変更;
-#X text 340 376 要素数の表示;
-#X text 15 590 テキストファイルからの読み込み;
-#X text 263 591 サウンドファイルからの読み込み;
-#X text 41 685 テキストファイルへの書き込み;
-#X text 293 678 WAVフォーマットファイルへの書き込み
-;
-#X text 20 785 アレイの要素にデータを格納したり、読み出したりするために、
-;
-#X text 23 799 以下のようなオブジェクトがあります。
-;
-#X text 593 601 ...オーディオ信号用のアレイ;
-#X connect 2 0 1 0;
-#X connect 3 0 4 0;
+#X obj 270 596 savepanel;
+#X obj 270 642 soundfiler;
+#X msg 270 619 write \$1 array99;
+#X connect 3 0 2 0;
 #X connect 4 0 5 0;
-#X connect 24 0 16 0;
-#X connect 26 0 27 0;
-#X connect 27 0 28 0;
-#X connect 29 0 30 0;
-#X connect 30 0 32 0;
-#X connect 32 0 31 0;
+#X connect 5 0 6 0;
+#X connect 35 0 26 0;
+#X connect 39 0 40 0;
+#X connect 40 0 41 0;
+#X connect 42 0 43 0;
+#X connect 43 0 45 0;
+#X connect 45 0 44 0;

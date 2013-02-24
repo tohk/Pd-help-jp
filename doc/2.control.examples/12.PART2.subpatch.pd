@@ -1,114 +1,72 @@
-#N canvas 419 124 732 994 12;
-#X msg 29 494 bang;
-#X floatatom 432 517 0 0 0 0 - - -;
-#N canvas 327 806 422 119 sample-subpatch 0;
-#X text 39 28 this is a subpatch of the main patch.;
-#X text 70 52 これは、メインパッチのサブパッチ;
-#X restore 29 130 pd sample-subpatch;
-#N canvas 1196 398 1050 340 eager-adder 0;
+#N canvas 84 47 648 623 12;
+#X msg 29 318 bang;
+#X floatatom 432 341 0 0 0;
+#X text 32 14 You can nest entire windows inside Pd boxes (and so on
+\, as deep as you wish.) There are two different ways to do it. First
+\, if you just want to add a room to the house \, so to speak \, type
+;
+#N canvas 344 151 422 119 sample-subpatch 1;
+#X text 39 43 this is a subpatch of the main patch.;
+#X restore 29 85 pd sample-subpatch;
+#X text 201 85 <-- you can give the window a name as an argument;
+#N canvas 0 0 654 340 eager-adder 0;
 #X obj 62 73 inlet;
 #X obj 118 73 inlet;
 #X obj 62 188 outlet;
 #X obj 118 101 t b f;
 #X obj 62 156 +;
+#X text 197 23 this is a sample subpatch which maintains the sum of
+two inputs \, doing the computation when either input changes. IF it's
+the left input \, the "+" object takes care if it \; if the right \,
+the "trigger" object first gives the "+" the new value \, then "bangs"
+the right inlet to make "+" do the computation.;
 #X text 55 232 Aside: this shows why \, in Pd and Max \, objects such
 as "+" only trigger on their left inlets: it's easy to build up from
 there \, but if more than one inlet were "hot" \, you wouldn't be able
 to change both of them without firing the calculation twice.;
-#X text 197 55 以前の、足し算パッチでは、左側のホットインレットに入力がなければ、
-計算が行われなかったが、これは、どちらのインレットに入力があっても
-正しい足し算を出力するサンプルサブパッチ。左側に入力があった場合は、
-以前に説明したとおり、計算が行われる。右側に入力があった場合、以前の
-パッチでは、正しく計算が行われなかったが、triggerオブジェクトを
-使用することにより、新しい数値メッセージが、右側のインレットに入力された後
-左側のインレットに、bangメッセージが入力されることにより、
-正しく計算が行われる;
-#X text 63 17 inlet、outletオブジェクトが、親パッチとのやりとりのインレット、アウトレットになる。
-;
-#X text 197 167 このサブパッチには、2つのインレットと、1つのアウトレットがあり、
-同時に、親パッチにも2つのインレットと、1つのアウトレットがある。
-;
-#X text 197 196 インレットの、左から右への順番が、サブパッチのinletの配置の順番となる。
-;
+#X text 197 112 Because of the two inlets and the one outlet \, the
+containing box (int eh parent patch) has two inlets and one outlet.
+They respect the left-to-right order of the inlet and outlet objects
+in the subpatch.;
 #X connect 0 0 4 0;
 #X connect 1 0 3 0;
 #X connect 3 0 4 0;
 #X connect 3 1 4 1;
 #X connect 4 0 2 0;
-#X restore 134 287 pd eager-adder;
-#X floatatom 134 260 0 0 0 0 - - -;
-#X floatatom 229 260 0 0 0 0 - - -;
-#X floatatom 134 315 0 0 0 0 - - -;
-#X obj 29 518 sendnumber 45 cookies;
-#X msg 226 490 bang;
-#X floatatom 519 517 0 0 0 0 - - -;
-#X obj 432 490 r cookies;
-#X obj 519 490 r pretzels;
-#X text 367 909 updated for Pd version 0.34;
-#X text 30 53 パッチのウィンドウは、ネスト（入れ子構造に）することができます。（多重ネストも可能）
+#X restore 135 185 pd eager-adder;
+#X floatatom 135 158 0 0 0;
+#X floatatom 256 158 0 0 0;
+#X floatatom 135 213 0 0 0;
+#X text 26 235 There is also a facility for making many copies of a
+patch which track any changes you make in the original. The subpatches
+are called abstractions. For example \, here's a simple abstraction
+that sends a number to a "receive" on command:;
+#X obj 29 342 sendnumber 45 cookies;
+#X msg 226 314 bang;
+#X obj 226 341 sendnumber 67 pretzels;
+#X floatatom 519 341 0 0 0;
+#X text 27 553 note that "$1" \, etc \, has a different meaning in
+object boxes (open one of the "sendnumber" abstractions for comments.)
 ;
-#X text 30 84 その方法は２つあって、まずは、”家”の中に、”部屋”を作るような感じで、
-;
-#X text 30 101 次のような、オブジェクトを作ると;
-#X text 170 129 <-- この場合、pdのあとに続く引数 "sample-subpatch"が、
-;
-#X text 203 145 入れ子になったウィンドウの名前になります。
-;
-#X text 30 167 runモードで、このボックスをクリックすると、サブパッチのウィンドウが現れます。
-;
-#X text 30 195 さらに、下のボックスをクリックしてみてください。
-;
-#X text 30 209 このサブパッチには、2つのインレットと1つのアウトレットがありますが
-;
-#X text 30 224 サブパッチのインレットとアウトレットがどのように関連しているかみることができます。
-;
-#X text 30 369 また、オリジナルで行ったあらゆる変更に追従するパッチのコピーを作るための便利な方法があります。
-;
-#X text 30 383 このサブパッチは、アブストラクションと呼びます。
-;
-#X text 30 403 最初のサブパッチでは、"サブパッチそのもの"は、この親パッチのファイルの中に
-埋め込まれた形で置かれていますが、アブストラクションでは、外部の別ファイルとして
-取り扱われています;
-#X text 30 455 たとえば、これは、"receive"に数値を送る簡単なアブストラクションの例：
-;
-#X text 30 567 このパッチファイルが置かれているファイルフォルダには、ボックスの中に"sendnumber"とタイプすると、
-;
-#X text 30 586 いつも別にロードされる、"sendnumber.pd"という独立したファイルがあります。
-;
-#X text 30 602 "sendnumber"ボックスをクリックして、それを確認してください。
-;
-#X text 30 618 また、アブストラクションで行った変更を保存してみてください。
-;
-#X text 30 715 "\$1"などは、オブジェクトボックスの中では違った意味を持ちます。
-;
-#X text 30 730 [sendnumber 45 cookies]と[sendnumber 67 pretzels]クリックすると
-;
-#X text 30 748 2つのアブストラクションが開いて、同じ"\$1"がありますが、これは、同じものではありません。
-;
-#X text 30 765 2つの同じアブストラクションが開いているように見えますが、それぞれは独立しています。
-;
-#X text 27 782 （"sendnumber"アブストラクション開いてをコメントをみてください）
-;
-#X text 30 650 その変更は、"sendnumber.pd"に対して行われます。もとから開いていたこのパッチに対してではありません。
-;
-#X text 30 681 他のコピーにも変更を有効にするためには、一度そのパッチウインドウを閉じてリロードしなければなりません。
-;
-#X text 30 665 また、1つのアブストラクションを変更したとして、その変更は、自動的に他のコピーに反映するわけではありません。
-;
-#X obj 226 517 sendnumber 67 pretzels;
-#X text 14 8 12.サブパッチ;
-#X text 31 836 ※最初に出てきた"サブパッチ"は、親パッチに埋め込まれているものなので、
-;
-#X text 44 853 別のパッチファイルから呼び出すことはできないが
-;
-#X text 43 871 独立したファイルとして格納されるアブストラクションは
-;
-#X text 43 889 別のパッチファイルからも呼び出すことができる。
-;
-#X connect 0 0 7 0;
-#X connect 3 0 6 0;
-#X connect 4 0 3 0;
-#X connect 5 0 3 1;
-#X connect 8 0 38 0;
-#X connect 10 0 1 0;
-#X connect 11 0 9 0;
+#X text 26 470 If you change one copy of an abstraction the change
+isn't automatically made on any other copies. You must keep track \,
+save the changes \, and cause Pd to reload the other copies (for example
+\, by closing and reopening the containing patch.);
+#X obj 432 314 r cookies;
+#X obj 519 314 r pretzels;
+#X text 31 107 If you click on the box (in run mode) the subwindow
+appears. Click on the one below to see how you give a subpatch inlets
+and outlets.;
+#X text 332 594 updated for Pd version 0.34;
+#X text 27 372 There is a separate file in this directory named "sendnumber.pd"
+which is loaded every time you type "sendnumber" in a box. Click on
+a "sendnumber" box above to see it. You can make changes in the subpatch
+and save them. The changes will be saved back to sendnumber.pd and
+not as part of this (containing) patch.;
+#X connect 0 0 10 0;
+#X connect 5 0 8 0;
+#X connect 6 0 5 0;
+#X connect 7 0 5 1;
+#X connect 11 0 12 0;
+#X connect 16 0 1 0;
+#X connect 17 0 13 0;
